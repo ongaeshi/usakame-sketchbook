@@ -38,18 +38,6 @@ $msg = "WELCOME TO MY ROOM!"
 $msg_timer = 180
 $notes = []
 
-# Audio frequency table for 4 distinct retro background melodies
-$tracks = [
-  # Track 0: Lofi Bedroom (chill pentatonic chords)
-  [261, 329, 392, 523, 392, 329, 293, 349, 440, 523, 440, 349],
-  # Track 1: Coffee Groove (funky bassline & beats)
-  [196, 196, 261, 293, 329, 261, 196, 220, 246, 293, 220, 196],
-  # Track 2: Garden Breeze (bright ascending melodies)
-  [329, 392, 440, 493, 587, 493, 440, 392, 349, 440, 523, 440],
-  # Track 3: Midnight Sun (jazzy dreamscape)
-  [220, 277, 329, 415, 329, 277, 246, 311, 370, 466, 370, 311]
-]
-
 def show_msg(text)
   $msg = text
   $msg_timer = 140
@@ -187,6 +175,7 @@ def update
   # Stop Music [X]
   if btn(5) && $now_playing
     $now_playing = nil
+    stop_music
     show_msg("MUSIC STOPPED")
   end
 
@@ -280,6 +269,7 @@ def interact_turntable
     $now_playing = $inventory[next_idx]
   end
 
+  music($now_playing[:id])
   show_msg("NOW PLAYING: " + $now_playing[:name] + " ♪")
 end
 
@@ -894,3 +884,34 @@ CCCCCCCCCCCCCCCC
 3 1 1 1 1 1 1 1 1 1 1 1 1 C 3 2 3 1 1 1 1 1 1 1 1 1 1 1 1 C 3 2 M M M M M M M M M M M M M M C 2
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+
+# ==============================================================================
+# SOUND EFFECTS (@SFX) & BGM (@MUSIC)
+# ==============================================================================
+
+# SFX 0: Vinyl Needle Drop
+@SFX 0 wave=noise speed=1 c3:drop c2:fade
+
+# Track 0: Lofi Bedroom (Chill & Cozy)
+@MUSIC 0
+ch0 wave=square vol=3 T96 L8 O4 e g a > c < a g e g  d f g a g f d f  e g a > c < a g e g  d2 e2
+ch1 wave=tri    vol=5 T96 L4 O3 c r g r  d r a r  c r g r  g r c2
+ch2 wave=noise  vol=2 T96 L8 O5 r c r c  r c r c  r c r c  r c r c
+
+# Track 1: Coffee Groove (Funky Cafe Beat)
+@MUSIC 1
+ch0 wave=pulse  vol=4 T128 L8 O4 c e g e a g e c  d f a f > c < a f d  e g b g > d < b g e  c e g > c < g e c4
+ch1 wave=tri    vol=5 T128 L8 O3 c4 c8 r e4 g8 r  d4 d8 r f4 a8 r  e4 e8 r g4 b8 r  c4 g8 c8 r2
+ch2 wave=noise  vol=3 T128 L8 O5 c r c c r c c r  c r c c r c c r  c r c c r c c r  c r c c r c c r
+
+# Track 2: Garden Breeze (Bright & Airy)
+@MUSIC 2
+ch0 wave=pulse  vol=3 T132 L8 O4 c d e g > c4 < b a  g e d e g4 e4  f a > c < a g e d c  d e g e d2
+ch1 wave=tri    vol=5 T132 L4 O3 c e g e  c e g e  f a > c < a  g b > d < g
+ch2 wave=noise  vol=2 T132 L8 O5 c r c r c r c r  c r c r c r c r  c r c r c r c r  c r c r c r c r
+
+# Track 3: Midnight Sun (Jazzy Dreamscape)
+@MUSIC 3
+ch0 wave=pulse  vol=3 T108 L8 O4 a > c e g f e c < a  b > d f a g f d < b  a > c e g > c < b a g  f d e2
+ch1 wave=tri    vol=5 T108 L4 O3 a > c < g > d  b > d < a > e  a > c < f > d  d e a2
+ch2 wave=noise  vol=2 T108 L8 O5 c8 c8 r8 c8 r8 c8 c8 r8  c8 c8 r8 c8 r8 c8 c8 r8  c8 c8 r8 c8 r8 c8 c8 r8  c8 c8 r8 c8 r8 c8 c8 r8
