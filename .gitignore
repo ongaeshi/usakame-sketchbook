@@ -1,0 +1,11 @@
+# Temporary / Editor files
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+
+# Build outputs
+target/
+*.exe
+*.wasm
