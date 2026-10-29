@@ -1,6 +1,6 @@
-# AGENTS.md (DUCK_TREASURE)
+# AGENTS.md (usakame-sketchbook)
 
-このプロジェクトはレトロゲームエンジン **Usakame (`uk`)** で作成された Ruby ゲームプロジェクトです。
+このリポジトリはレトロゲームエンジン **Usakame (`uk`)** で作成された Ruby スケッチ／ゲーム集です。
 AI エージェントがコードの生成・編集・デバッグを行う際は、以下のガイドラインを必ず遵守してください。
 
 ---
@@ -45,34 +45,34 @@ Usakame のスクリプト実行環境は軽量 Ruby VM **mrubyedge** です。�
 * **🤖 高速ヘッドレス検証（構文 & 60フレーム実行チェック、推奨）**:
   GUI ウィンドウを開かずに一瞬（0.1秒未満）で構文エラーや実行時例外（`NoMethodError` 等）を検証できます：
   ```bash
-  uk check game.rb
+  uk check <script.rb>        # 例: uk check duck_treasure.rb
   # ガチャキーモード（方向キー・パッドボタンの擬似連打テスト）
-  uk check game.rb -g --frames 120
+  uk check duck_treasure.rb -g --frames 120
   ```
   コードを生成・編集した直後は、まずこのコマンドを実行してクラッシュしないことを確認してください。
 * **ゲームの起動（ホットリロード対応）**:
   ```bash
-  uk run game.rb
+  uk run duck_treasure.rb
   ```
 * **ゲームとエディタ（スプライト／タイルマップ）の同時起動**:
   ```bash
-  uk run_with_edit game.rb
+  uk run_with_edit duck_treasure.rb
   ```
 * **スプライトエディタ／タイルマップエディタ単体起動**:
   ```bash
-  uk edit spr game.rb
-  uk edit map game.rb
+  uk edit spr duck_treasure.rb
+  uk edit map duck_treasure.rb
   ```
 * **🤖 AI エージェントによる自動動作確認 & スクリーンショット検証**:
   画面の描画結果を画像として自律確認したい場合は、以下を実行すると指定フレーム後に PNG を保存して自動終了します（構文エラーや実行時エラーがあれば標準エラー出力に表示されます）：
   ```bash
-  uk run game.rb --screenshot screenshots/check.png --frames 60
+  uk run duck_treasure.rb --screenshot screenshots/check.png --frames 60
   ```
   コードを変更した後はこのコマンドでクラッシュがないか・描画が意図通りかを自律的に確認してください。
 * **リソース分離・結合・配布ビルド**:
   ```bash
-  uk unpack game.rb        # __END__ リソースを .spr / .map / .sfx に分離
-  uk pack game.rb          # .spr / .map / .sfx を game.rb の __END__ に統合
-  uk build game.rb         # 単一実行ファイル (.exe) を生成
-  uk browser game.rb       # ブラウザ (WASM) でホットリロード実行
+  uk unpack duck_treasure.rb        # __END__ リソースを .spr / .map / .sfx に分離
+  uk pack duck_treasure.rb          # .spr / .map / .sfx を duck_treasure.rb の __END__ に統合
+  uk build duck_treasure.rb         # 単一実行ファイル (.exe) を生成
+  uk browser duck_treasure.rb       # ブラウザ (WASM) でホットリロード実行
   ```

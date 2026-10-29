@@ -1,8 +1,0 @@
-# Usakame generated files
-/screenshots/
-/*_packed.rb
-/*.exe
-/*.wasm
-
-# AI / Reference files (untracked)
-/refs/

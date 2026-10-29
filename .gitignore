@@ -5,10 +5,14 @@
 .DS_Store
 Thumbs.db
 
-# Build outputs
+# Build outputs / Usakame generated files
 target/
 *.exe
 *.wasm
+*_packed.rb
 
 # Screenshots
 screenshots/
+
+# AI / Reference files (untracked)
+refs/
