@@ -9,3 +9,6 @@ Thumbs.db
 target/
 *.exe
 *.wasm
+
+# Screenshots
+screenshots/
