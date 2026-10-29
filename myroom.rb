@@ -200,7 +200,7 @@ def update
       $notes << {
         x: ($rx == 1 && $ry == 1) ? 128 : rand(200) + 28,
         y: ($rx == 1 && $ry == 1) ? 104 : rand(180) + 40,
-        vy: -1.0,
+        vy: -1,
         life: 45,
         type: ($music_frame / 25) % 2,
         col: $now_playing[:col]
@@ -210,7 +210,7 @@ def update
 
   # Update notes
   $notes.each do |n|
-    n[:y] = n[:y] + n[:vy]
+    n[:y] = (n[:y] + n[:vy]).to_i
     n[:life] = n[:life] - 1
   end
   $notes.reject! { |n| n[:life] <= 0 }
@@ -314,18 +314,20 @@ def draw
 
   # Draw Animated Floating Musical Notes
   $notes.each do |n|
+    nx = n[:x].to_i
+    ny = n[:y].to_i
     if n[:type] == 0
       # Single note ♪
-      circfill(n[:x], n[:y], 2, n[:col])
-      line(n[:x] + 2, n[:y], n[:x] + 2, n[:y] - 6, n[:col])
-      line(n[:x] + 2, n[:y] - 6, n[:x] + 4, n[:y] - 5, n[:col])
+      circfill(nx, ny, 2, n[:col])
+      line(nx + 2, ny, nx + 2, ny - 6, n[:col])
+      line(nx + 2, ny - 6, nx + 4, ny - 5, n[:col])
     else
       # Double note ♫
-      circfill(n[:x], n[:y], 1, n[:col])
-      circfill(n[:x] + 5, n[:y], 1, n[:col])
-      line(n[:x] + 1, n[:y], n[:x] + 1, n[:y] - 5, n[:col])
-      line(n[:x] + 6, n[:y], n[:x] + 6, n[:y] - 5, n[:col])
-      line(n[:x] + 1, n[:y] - 5, n[:x] + 6, n[:y] - 5, n[:col])
+      circfill(nx, ny, 1, n[:col])
+      circfill(nx + 5, ny, 1, n[:col])
+      line(nx + 1, ny, nx + 1, ny - 5, n[:col])
+      line(nx + 6, ny, nx + 6, ny - 5, n[:col])
+      line(nx + 1, ny - 5, nx + 6, ny - 5, n[:col])
     end
   end
 
